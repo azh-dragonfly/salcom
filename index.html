@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AZH Salary Package Comparator</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Roboto:ital,wght@0,300;0,400;0,500;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Nunito:ital,wght@0,300;0,400;0,500;1,400&family=Poppins:ital,wght@0,300;0,400;0,500;1,400&display=swap"
       rel="stylesheet">
     <style>
       /* ── THEMES ── */
@@ -95,7 +95,7 @@
       body {
         background: var(--bg);
         color: var(--text);
-        font-family: 'DM Sans', sans-serif;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         font-size: 14px;
         min-height: 100vh;
         transition: background 0.25s, color 0.25s;
@@ -119,7 +119,7 @@
       }
 
       .brand-tag {
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         font-size: 10px;
         color: var(--muted);
         letter-spacing: 0.16em;
@@ -146,7 +146,7 @@
       .theme-label {
         font-size: 10px;
         color: var(--muted);
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         text-transform: uppercase;
         letter-spacing: 0.1em;
         margin-right: 4px;
@@ -157,7 +157,7 @@
         border-radius: 5px;
         padding: 5px 11px;
         font-size: 11px;
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         cursor: pointer;
         background: var(--surface2);
         color: var(--muted);
@@ -197,7 +197,7 @@
         color: var(--muted);
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
       }
 
       .inp-wrap {
@@ -251,7 +251,7 @@
         border: none;
         border-radius: 6px;
         padding: 8px 16px;
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         font-size: 11px;
         font-weight: 500;
         cursor: pointer;
@@ -270,7 +270,7 @@
         border: 1px solid var(--border2);
         border-radius: 6px;
         padding: 8px 14px;
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         font-size: 11px;
         cursor: pointer;
         transition: all 0.15s;
@@ -293,7 +293,7 @@
         color: var(--muted);
         border-radius: 5px;
         padding: 7px 14px;
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         font-size: 11px;
         cursor: pointer;
         transition: all 0.15s;
@@ -364,7 +364,7 @@
       .ratios-toggle span {
         font-size: 11px;
         color: var(--muted);
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
       }
 
       .ratios-toggle .arrow {
@@ -403,7 +403,7 @@
       .ratio-item label {
         font-size: 10px;
         color: var(--muted);
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         text-transform: uppercase;
         letter-spacing: 0.08em;
       }
@@ -457,7 +457,7 @@
         border: 1px solid var(--border2);
         border-radius: 5px;
         padding: 5px 12px;
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         font-size: 10px;
         cursor: pointer;
         transition: all 0.15s;
@@ -485,7 +485,7 @@
         z-index: 10;
         padding: 10px 14px;
         text-align: right;
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         font-size: 10px;
         font-weight: 500;
         color: var(--muted);
@@ -521,7 +521,7 @@
       tbody tr td:first-child {
         text-align: left;
         color: var(--muted);
-        font-family: 'DM Sans', sans-serif;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         font-size: 13px;
       }
 
@@ -537,7 +537,7 @@
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 0.12em;
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         padding: 5px 14px;
         border-bottom: 1px solid var(--border2);
       }
@@ -612,11 +612,35 @@
         font-size: 13px;
       }
 
-      /* ── FOOTER ── */
+      .font-select {
+        background: var(--surface2);
+        border: 1px solid var(--border2);
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
+        color: var(--muted);
+        cursor: pointer;
+        outline: none;
+        transition: all 0.15s;
+        appearance: none;
+        -webkit-appearance: none;
+        padding-right: 22px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b6b72'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 7px center;
+      }
+
+      .font-select:hover, .font-select:focus {
+        border-color: var(--accent);
+        color: var(--text);
+      }
+
+
       footer {
         padding: 0.85rem 1.75rem;
         border-top: 1px solid var(--border);
-        font-family: 'IBM Plex Mono', monospace;
+        font-family: var(--font-ui, 'Poppins', sans-serif);
         font-size: 10px;
         color: var(--muted);
         display: flex;
@@ -638,9 +662,17 @@
         <span class="theme-label">Theme</span>
         <button class="theme-btn active" onclick="setTheme('day',this)">Day</button>
         <button class="theme-btn" onclick="setTheme('night',this)">Night</button>
-        <button class="theme-btn" onclick="setTheme('day',this)">Day</button>
         <button class="theme-btn" onclick="setTheme('sepia',this)">Sepia</button>
         <button class="theme-btn" onclick="setTheme('slate',this)">Slate</button>
+        <span class="theme-label" style="margin-left:8px;">Font</span>
+        <select class="font-select" onchange="setFont(this.value)">
+          <option value="DM Sans">DM Sans</option>
+          <option value="Inter">Inter</option>
+          <option value="Roboto">Roboto</option>
+          <option value="Lato">Lato</option>
+          <option value="Nunito">Nunito</option>
+          <option value="Poppins" selected>Poppins</option>
+        </select>
       </div>
     </header>
 
@@ -704,7 +736,7 @@
       let ratios = { ...DEFAULTS };
       let columns = []; // {gross, label}
       let view = 'monthly';
-      let theme = 'night';
+      let theme = 'day';
 
       /* ── RATIO PANEL ── */
       const RATIO_DEFS = [
@@ -827,7 +859,7 @@
       /* ── RENDER ── */
       function render() {
         const chips = document.getElementById('chips');
-        chips.innerHTML = columns.length ? '' : '<span style="font-size:12px;color:var(--muted);font-family:\'IBM Plex Mono\',monospace;">No columns yet.</span>';
+        chips.innerHTML = columns.length ? '' : '<span style="font-size:12px;color:var(--muted);">No columns yet.</span>';
         columns.forEach((col, i) => {
           chips.innerHTML += `<div class="chip">
       ${col.label ? `<span class="chip-name">${col.label}</span>` : ''}
@@ -922,8 +954,13 @@
         document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') addCol(); });
       });
 
+      function setFont(fontName) {
+        document.documentElement.style.setProperty('--font-ui', `'${fontName}', sans-serif`);
+      }
+
       /* ── INIT ── */
       buildRatioPanel();
+      setFont('Poppins');
       render();
     </script>
   </body>
