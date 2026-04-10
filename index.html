@@ -1,233 +1,731 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AZH Salary Package Comparator</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style>
-/* ── THEMES ── */
-[data-theme="night"] {
-  --bg: #0d0d0f; --surface: #151517; --surface2: #1c1c1f; --surface3: #222226;
-  --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.13);
-  --text: #e8e8ea; --muted: #6b6b72; --faint: #3a3a40;
-  --accent: #4ade80; --danger: #f87171; --info: #60a5fa; --warn: #facc15;
-  --alt1: rgba(255,255,255,0.03); --alt2: rgba(255,255,255,0.0);
-  --col-colors: #1e3a2f,#1a2e3d,#2e1f3a,#2e2b1a,#1a2a2e,#2e1f26;
-}
-[data-theme="day"] {
-  --bg: #f5f5f5; --surface: #ffffff; --surface2: #ececec; --surface3: #e2e2e2;
-  --border: rgba(0,0,0,0.07); --border2: rgba(0,0,0,0.13);
-  --text: #111113; --muted: #777780; --faint: #d0d0d5;
-  --accent: #16a34a; --danger: #dc2626; --info: #2563eb; --warn: #b45309;
-  --alt1: rgba(0,0,0,0.025); --alt2: rgba(0,0,0,0.0);
-  --col-colors: #d1fae5,#dbeafe,#ede9fe,#fef9c3,#ccfbf1,#fce7f3;
-}
-[data-theme="sepia"] {
-  --bg: #f5f0e8; --surface: #faf7f0; --surface2: #ede8de; --surface3: #e5dfd3;
-  --border: rgba(100,80,40,0.1); --border2: rgba(100,80,40,0.18);
-  --text: #2c2416; --muted: #8c7a5e; --faint: #cfc4b0;
-  --accent: #6b6300; --danger: #9b2c2c; --info: #1e4d8c; --warn: #7c4a00;
-  --alt1: rgba(100,80,40,0.04); --alt2: rgba(0,0,0,0.0);
-  --col-colors: #e8f5e3,#e3eef8,#f3ede8,#f8f3e3,#e3f5f3,#f5e3eb;
-}
-[data-theme="slate"] {
-  --bg: #1a1f2e; --surface: #232a3b; --surface2: #2a3347; --surface3: #303b52;
-  --border: rgba(150,180,255,0.07); --border2: rgba(150,180,255,0.14);
-  --text: #d4dcf0; --muted: #6a7898; --faint: #2e3a52;
-  --accent: #7dd3fc; --danger: #fda4af; --info: #a5b4fc; --warn: #fcd34d;
-  --alt1: rgba(150,180,255,0.04); --alt2: rgba(0,0,0,0.0);
-  --col-colors: #1e2d3d,#2d1e3d,#1e3d2d,#3d2d1e,#1e2d3d,#2d3d1e;
-}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; min-height: 100vh; transition: background 0.25s, color 0.25s; }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZH Salary Package Comparator</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet">
+    <style>
+      /* ── THEMES ── */
+      [data-theme="night"] {
+        --bg: #0d0d0f;
+        --surface: #151517;
+        --surface2: #1c1c1f;
+        --surface3: #222226;
+        --border: rgba(255, 255, 255, 0.07);
+        --border2: rgba(255, 255, 255, 0.13);
+        --text: #e8e8ea;
+        --muted: #6b6b72;
+        --faint: #3a3a40;
+        --accent: #4ade80;
+        --danger: #f87171;
+        --info: #60a5fa;
+        --warn: #facc15;
+        --alt1: rgba(255, 255, 255, 0.03);
+        --alt2: rgba(255, 255, 255, 0.0);
+        --col-colors: #1e3a2f, #1a2e3d, #2e1f3a, #2e2b1a, #1a2a2e, #2e1f26;
+      }
 
-/* ── HEADER ── */
-header { padding: 1.5rem 1.75rem 1rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
-.brand { display: flex; flex-direction: column; gap: 3px; }
-.brand-tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; }
-.brand-title { font-size: 20px; font-weight: 300; letter-spacing: -0.02em; }
-.brand-title strong { font-weight: 500; color: var(--accent); }
+      [data-theme="day"] {
+        --bg: #f5f5f5;
+        --surface: #ffffff;
+        --surface2: #ececec;
+        --surface3: #e2e2e2;
+        --border: rgba(0, 0, 0, 0.07);
+        --border2: rgba(0, 0, 0, 0.13);
+        --text: #111113;
+        --muted: #777780;
+        --faint: #d0d0d5;
+        --accent: #16a34a;
+        --danger: #dc2626;
+        --info: #2563eb;
+        --warn: #b45309;
+        --alt1: rgba(0, 0, 0, 0.025);
+        --alt2: rgba(0, 0, 0, 0.0);
+        --col-colors: #d1fae5, #dbeafe, #ede9fe, #fef9c3, #ccfbf1, #fce7f3;
+      }
 
-.theme-row { display: flex; gap: 6px; align-items: center; }
-.theme-label { font-size: 10px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; margin-right: 4px; }
-.theme-btn { border: 1px solid var(--border2); border-radius: 5px; padding: 5px 11px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; cursor: pointer; background: var(--surface2); color: var(--muted); transition: all 0.15s; }
-.theme-btn:hover, .theme-btn.active { background: var(--surface3); color: var(--text); border-color: var(--border2); }
-.theme-btn.active { color: var(--accent); border-color: var(--accent); }
+      [data-theme="sepia"] {
+        --bg: #f5f0e8;
+        --surface: #faf7f0;
+        --surface2: #ede8de;
+        --surface3: #e5dfd3;
+        --border: rgba(100, 80, 40, 0.1);
+        --border2: rgba(100, 80, 40, 0.18);
+        --text: #2c2416;
+        --muted: #8c7a5e;
+        --faint: #cfc4b0;
+        --accent: #6b6300;
+        --danger: #9b2c2c;
+        --info: #1e4d8c;
+        --warn: #7c4a00;
+        --alt1: rgba(100, 80, 40, 0.04);
+        --alt2: rgba(0, 0, 0, 0.0);
+        --col-colors: #e8f5e3, #e3eef8, #f3ede8, #f8f3e3, #e3f5f3, #f5e3eb;
+      }
 
-/* ── CONTROLS ── */
-.controls { padding: 1rem 1.75rem; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
-.cg { display: flex; flex-direction: column; gap: 4px; }
-.cg label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'IBM Plex Mono', monospace; }
-.inp-wrap { display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border2); border-radius: 6px; overflow: hidden; transition: border-color 0.15s; }
-.inp-wrap:focus-within { border-color: var(--accent); }
-.inp-wrap .pfx { padding: 0 10px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 12px; border-right: 1px solid var(--border); }
-.inp-wrap input { background: transparent; border: none; outline: none; color: var(--text); font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 7px 10px; width: 130px; }
-.inp-wrap input::placeholder { color: var(--faint); }
-.inp-wrap input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
-.inp-name { width: 110px; }
-.btn-add { background: var(--accent); color: var(--bg); border: none; border-radius: 6px; padding: 8px 16px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; cursor: pointer; letter-spacing: 0.06em; transition: opacity 0.15s; white-space: nowrap; }
-.btn-add:hover { opacity: 0.82; }
-.btn-clear { background: transparent; color: var(--muted); border: 1px solid var(--border2); border-radius: 6px; padding: 8px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; cursor: pointer; transition: all 0.15s; }
-.btn-clear:hover { color: var(--danger); border-color: var(--danger); }
-.view-toggle { display: flex; gap: 4px; margin-left: auto; }
-.view-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); border-radius: 5px; padding: 7px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; cursor: pointer; transition: all 0.15s; }
-.view-btn.active { background: var(--surface3); border-color: var(--border2); color: var(--accent); }
+      [data-theme="slate"] {
+        --bg: #1a1f2e;
+        --surface: #232a3b;
+        --surface2: #2a3347;
+        --surface3: #303b52;
+        --border: rgba(150, 180, 255, 0.07);
+        --border2: rgba(150, 180, 255, 0.14);
+        --text: #d4dcf0;
+        --muted: #6a7898;
+        --faint: #2e3a52;
+        --accent: #7dd3fc;
+        --danger: #fda4af;
+        --info: #a5b4fc;
+        --warn: #fcd34d;
+        --alt1: rgba(150, 180, 255, 0.04);
+        --alt2: rgba(0, 0, 0, 0.0);
+        --col-colors: #1e2d3d, #2d1e3d, #1e3d2d, #3d2d1e, #1e2d3d, #2d3d1e;
+      }
 
-/* ── CHIPS ── */
-.chips { display: flex; flex-wrap: wrap; gap: 7px; padding: 0.65rem 1.75rem; border-bottom: 1px solid var(--border); min-height: 44px; align-items: center; }
-.chip { display: flex; align-items: center; gap: 5px; border: 1px solid var(--border2); border-radius: 20px; padding: 3px 9px 3px 11px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text); background: var(--surface2); }
-.chip-name { color: var(--muted); font-size: 10px; margin-right: 2px; }
-.chip-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 15px; line-height: 1; padding: 0 2px; transition: color 0.1s; }
-.chip-remove:hover { color: var(--danger); }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-/* ── RATIOS PANEL ── */
-.ratios-toggle { display: flex; align-items: center; gap: 8px; padding: 0.6rem 1.75rem; border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
-.ratios-toggle span { font-size: 11px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
-.ratios-toggle .arrow { font-size: 10px; color: var(--muted); transition: transform 0.2s; }
-.ratios-toggle.open .arrow { transform: rotate(90deg); }
-.ratios-panel { display: none; padding: 1rem 1.75rem; border-bottom: 1px solid var(--border); background: var(--surface2); }
-.ratios-panel.open { display: block; }
-.ratio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-.ratio-item { display: flex; flex-direction: column; gap: 3px; }
-.ratio-item label { font-size: 10px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
-.ratio-inp-wrap { display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border2); border-radius: 5px; overflow: hidden; }
-.ratio-inp-wrap:focus-within { border-color: var(--accent); }
-.ratio-inp-wrap input { background: transparent; border: none; outline: none; color: var(--text); font-family: 'IBM Plex Mono', monospace; font-size: 12px; padding: 6px 8px; width: 80px; }
-.ratio-inp-wrap input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
-.ratio-inp-wrap .sfx { padding: 0 8px; color: var(--muted); font-size: 11px; border-left: 1px solid var(--border); }
-.ratio-note { font-size: 10px; color: var(--muted); margin-top: 6px; font-style: italic; }
-.btn-reset { margin-top: 12px; background: transparent; color: var(--muted); border: 1px solid var(--border2); border-radius: 5px; padding: 5px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; cursor: pointer; transition: all 0.15s; }
-.btn-reset:hover { color: var(--accent); border-color: var(--accent); }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        min-height: 100vh;
+        transition: background 0.25s, color 0.25s;
+      }
 
-/* ── TABLE ── */
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; }
-thead th { position: sticky; top: 0; background: var(--surface); z-index: 10; padding: 10px 14px; text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--border2); white-space: nowrap; }
-thead th:first-child { text-align: left; min-width: 200px; }
-thead th:nth-child(2) { text-align: center; min-width: 68px; }
-thead th.col-h { font-size: 12px; color: var(--text); }
+      /* ── HEADER ── */
+      header {
+        padding: 1.5rem 1.75rem 1rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
 
-tbody tr td { padding: 8px 14px; border-bottom: 1px solid var(--border); text-align: right; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text); transition: background 0.15s; }
-tbody tr td:first-child { text-align: left; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 13px; }
-tbody tr td:nth-child(2) { text-align: center; color: var(--muted); font-size: 11px; }
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
 
-tr.sec-hdr td { background: var(--surface2) !important; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; font-family: 'IBM Plex Mono', monospace; padding: 5px 14px; border-bottom: 1px solid var(--border2); }
-tr.row-total td { background: var(--alt1); font-weight: 500; color: var(--text); }
-tr.row-grand td { color: var(--accent); font-weight: 500; font-size: 13px; border-top: 1px solid var(--faint); }
-tr.row-tax td { color: var(--danger); }
-tr.row-net td { color: var(--accent); font-weight: 500; }
-tr.row-netpct td { color: var(--muted); font-size: 11px; font-style: italic; }
-tbody tr:not(.sec-hdr):hover td:first-child,
-tbody tr:not(.sec-hdr):hover td:nth-child(2) { background: var(--alt1); }
+      .brand-tag {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        color: var(--muted);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
 
-/* alternating column tints — applied via JS inline style */
-.diff-b { display: inline-block; font-size: 10px; padding: 1px 5px; border-radius: 3px; margin-left: 5px; font-family: 'IBM Plex Mono', monospace; }
-.diff-p { background: rgba(74,222,128,0.14); color: var(--accent); }
-.diff-n { background: rgba(248,113,113,0.14); color: var(--danger); }
+      .brand-title {
+        font-size: 20px;
+        font-weight: 300;
+        letter-spacing: -0.02em;
+      }
 
-/* ── EMPTY ── */
-.empty { text-align: center; padding: 4rem 2rem; color: var(--muted); }
-.empty-icon { font-size: 28px; opacity: 0.25; margin-bottom: 0.5rem; }
-.empty p { font-size: 13px; }
+      .brand-title strong {
+        font-weight: 500;
+        color: var(--accent);
+      }
 
-/* ── FOOTER ── */
-footer { padding: 0.85rem 1.75rem; border-top: 1px solid var(--border); font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
-</style>
-</head>
-<body data-theme="night">
+      .theme-row {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
 
-<header>
-  <div class="brand">
-    <div class="brand-tag">AZH Tools &mdash; v1.0</div>
-    <div class="brand-title"><strong>AZH</strong> Salary Package Comparator</div>
-  </div>
-  <div class="theme-row">
-    <span class="theme-label">Theme</span>
-    <button class="theme-btn active" onclick="setTheme('night',this)">Night</button>
-    <button class="theme-btn" onclick="setTheme('day',this)">Day</button>
-    <button class="theme-btn" onclick="setTheme('sepia',this)">Sepia</button>
-    <button class="theme-btn" onclick="setTheme('slate',this)">Slate</button>
-  </div>
-</header>
+      .theme-label {
+        font-size: 10px;
+        color: var(--muted);
+        font-family: 'IBM Plex Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-right: 4px;
+      }
 
-<div class="controls">
-  <div class="cg">
-    <label>Label (optional)</label>
-    <div class="inp-wrap"><input class="inp-name" type="text" id="inpName" placeholder="e.g. Offer A" maxlength="20" /></div>
-  </div>
-  <div class="cg">
-    <label>Monthly gross (৳)</label>
-    <div class="inp-wrap"><span class="pfx">৳</span><input type="number" id="inpGross" placeholder="e.g. 75000" min="5000" max="999999" step="500" /></div>
-  </div>
-  <button class="btn-add" onclick="addCol()">+ Add column</button>
-  <button class="btn-clear" onclick="clearAll()">Clear all</button>
-  <div class="view-toggle">
-    <button class="view-btn active" onclick="setView('monthly',this)">Monthly</button>
-    <button class="view-btn" onclick="setView('yearly',this)">Yearly</button>
-  </div>
-</div>
+      .theme-btn {
+        border: 1px solid var(--border2);
+        border-radius: 5px;
+        padding: 5px 11px;
+        font-size: 11px;
+        font-family: 'IBM Plex Mono', monospace;
+        cursor: pointer;
+        background: var(--surface2);
+        color: var(--muted);
+        transition: all 0.15s;
+      }
 
-<div class="chips" id="chips"></div>
+      .theme-btn:hover,
+      .theme-btn.active {
+        background: var(--surface3);
+        color: var(--text);
+        border-color: var(--border2);
+      }
 
-<div class="ratios-toggle" id="ratiosToggle" onclick="toggleRatios()">
-  <span class="arrow">▶</span>
-  <span>Component ratios (% of gross) — click to customize</span>
-</div>
-<div class="ratios-panel" id="ratiosPanel">
-  <div class="ratio-grid" id="ratioGrid"></div>
-  <p class="ratio-note">* Mobile allowance is a fixed amount (not % of gross). Changes apply instantly to the table.</p>
-  <button class="btn-reset" onclick="resetRatios()">↺ Reset to defaults</button>
-</div>
+      .theme-btn.active {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
 
-<div class="table-wrap" id="tableWrap">
-  <div class="empty"><div class="empty-icon">↑</div><p>Add a salary column above to begin.</p></div>
-</div>
+      /* ── CONTROLS ── */
+      .controls {
+        padding: 1rem 1.75rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: flex-end;
+      }
 
-<footer>
-  <span>AZH Salary Package Comparator &mdash; all values are estimates</span>
-  <span>Tax: Bangladesh FY2025-26 slabs &nbsp;|&nbsp; % diff shown against first column</span>
-</footer>
+      .cg {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
 
-<script>
-const COL_TINTS_NIGHT = ['rgba(30,80,50,0.18)','rgba(30,50,90,0.18)','rgba(70,30,90,0.18)','rgba(90,80,20,0.14)','rgba(20,70,80,0.18)','rgba(90,20,50,0.16)'];
-const COL_TINTS_DAY   = ['rgba(16,185,80,0.07)','rgba(37,99,235,0.07)','rgba(124,58,237,0.07)','rgba(180,130,0,0.07)','rgba(6,182,212,0.07)','rgba(219,39,119,0.07)'];
-const COL_TINTS_SEPIA = ['rgba(60,120,40,0.08)','rgba(30,80,150,0.08)','rgba(120,40,20,0.08)','rgba(150,100,10,0.08)','rgba(20,120,110,0.08)','rgba(140,30,80,0.08)'];
-const COL_TINTS_SLATE = ['rgba(100,200,255,0.07)','rgba(160,130,255,0.07)','rgba(100,255,180,0.07)','rgba(255,200,80,0.07)','rgba(100,180,255,0.07)','rgba(255,100,150,0.07)'];
+      .cg label {
+        font-size: 10px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-family: 'IBM Plex Mono', monospace;
+      }
 
-const TINT_MAP = { night: COL_TINTS_NIGHT, day: COL_TINTS_DAY, sepia: COL_TINTS_SEPIA, slate: COL_TINTS_SLATE };
+      .inp-wrap {
+        display: flex;
+        align-items: center;
+        background: var(--surface);
+        border: 1px solid var(--border2);
+        border-radius: 6px;
+        overflow: hidden;
+        transition: border-color 0.15s;
+      }
 
-const DEFAULTS = {
-  basic: 60, hr: 25, travel: 4.167, medical: 5, passage: 5.833,
-  festival: 8.333, mobile_fixed: 4000, perf: 25
-};
+      .inp-wrap:focus-within {
+        border-color: var(--accent);
+      }
 
-let ratios = { ...DEFAULTS };
-let columns = []; // {gross, label}
-let view = 'monthly';
-let theme = 'night';
+      .inp-wrap .pfx {
+        padding: 0 10px;
+        color: var(--muted);
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 12px;
+        border-right: 1px solid var(--border);
+      }
 
-/* ── RATIO PANEL ── */
-const RATIO_DEFS = [
-  { key:'basic',    label:'Basic',             pct:true  },
-  { key:'hr',       label:'House rent',         pct:true  },
-  { key:'travel',   label:'Travel allowance',   pct:true  },
-  { key:'medical',  label:'Medical allowance',  pct:true  },
-  { key:'passage',  label:'Passage (local)',     pct:true  },
-  { key:'festival', label:'Festival bonus',      pct:true  },
-  { key:'perf',     label:'Performance bonus',   pct:true  },
-  { key:'mobile_fixed', label:'Mobile (fixed ৳)', pct:false },
-];
+      .inp-wrap input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--text);
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 13px;
+        padding: 7px 10px;
+        width: 130px;
+      }
 
-function buildRatioPanel() {
-  const grid = document.getElementById('ratioGrid');
-  grid.innerHTML = '';
-  RATIO_DEFS.forEach(def => {
-    const val = ratios[def.key];
-    const sfx = def.pct ? '%' : '৳';
-    const step = def.pct ? '0.001' : '100';
-    grid.innerHTML += `
+      .inp-wrap input::placeholder {
+        color: var(--faint);
+      }
+
+      .inp-wrap input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
+      .inp-name {
+        width: 110px;
+      }
+
+      .btn-add {
+        background: var(--accent);
+        color: var(--bg);
+        border: none;
+        border-radius: 6px;
+        padding: 8px 16px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        font-weight: 500;
+        cursor: pointer;
+        letter-spacing: 0.06em;
+        transition: opacity 0.15s;
+        white-space: nowrap;
+      }
+
+      .btn-add:hover {
+        opacity: 0.82;
+      }
+
+      .btn-clear {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--border2);
+        border-radius: 6px;
+        padding: 8px 14px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+
+      .btn-clear:hover {
+        color: var(--danger);
+        border-color: var(--danger);
+      }
+
+      .view-toggle {
+        display: flex;
+        gap: 4px;
+        margin-left: auto;
+      }
+
+      .view-btn {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 5px;
+        padding: 7px 14px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+
+      .view-btn.active {
+        background: var(--surface3);
+        border-color: var(--border2);
+        color: var(--accent);
+      }
+
+      /* ── CHIPS ── */
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        padding: 0.65rem 1.75rem;
+        border-bottom: 1px solid var(--border);
+        min-height: 44px;
+        align-items: center;
+      }
+
+      .chip {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border: 1px solid var(--border2);
+        border-radius: 20px;
+        padding: 3px 9px 3px 11px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        color: var(--text);
+        background: var(--surface2);
+      }
+
+      .chip-name {
+        color: var(--muted);
+        font-size: 10px;
+        margin-right: 2px;
+      }
+
+      .chip-remove {
+        background: none;
+        border: none;
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 15px;
+        line-height: 1;
+        padding: 0 2px;
+        transition: color 0.1s;
+      }
+
+      .chip-remove:hover {
+        color: var(--danger);
+      }
+
+      /* ── RATIOS PANEL ── */
+      .ratios-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.6rem 1.75rem;
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .ratios-toggle span {
+        font-size: 11px;
+        color: var(--muted);
+        font-family: 'IBM Plex Mono', monospace;
+      }
+
+      .ratios-toggle .arrow {
+        font-size: 10px;
+        color: var(--muted);
+        transition: transform 0.2s;
+      }
+
+      .ratios-toggle.open .arrow {
+        transform: rotate(90deg);
+      }
+
+      .ratios-panel {
+        display: none;
+        padding: 1rem 1.75rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface2);
+      }
+
+      .ratios-panel.open {
+        display: block;
+      }
+
+      .ratio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+      }
+
+      .ratio-item {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+
+      .ratio-item label {
+        font-size: 10px;
+        color: var(--muted);
+        font-family: 'IBM Plex Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .ratio-inp-wrap {
+        display: flex;
+        align-items: center;
+        background: var(--surface);
+        border: 1px solid var(--border2);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .ratio-inp-wrap:focus-within {
+        border-color: var(--accent);
+      }
+
+      .ratio-inp-wrap input {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--text);
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 12px;
+        padding: 6px 8px;
+        width: 80px;
+      }
+
+      .ratio-inp-wrap input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+
+      .ratio-inp-wrap .sfx {
+        padding: 0 8px;
+        color: var(--muted);
+        font-size: 11px;
+        border-left: 1px solid var(--border);
+      }
+
+      .ratio-note {
+        font-size: 10px;
+        color: var(--muted);
+        margin-top: 6px;
+        font-style: italic;
+      }
+
+      .btn-reset {
+        margin-top: 12px;
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--border2);
+        border-radius: 5px;
+        padding: 5px 12px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+
+      .btn-reset:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      /* ── TABLE ── */
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead th {
+        position: sticky;
+        top: 0;
+        background: var(--surface);
+        z-index: 10;
+        padding: 10px 14px;
+        text-align: right;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border2);
+        white-space: nowrap;
+      }
+
+      thead th:first-child {
+        text-align: left;
+        min-width: 200px;
+      }
+
+      thead th:nth-child(2) {
+        text-align: center;
+        min-width: 68px;
+      }
+
+      thead th.col-h {
+        font-size: 12px;
+        color: var(--text);
+      }
+
+      tbody tr td {
+        padding: 8px 14px;
+        border-bottom: 1px solid var(--border);
+        text-align: right;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 12px;
+        color: var(--text);
+        transition: background 0.15s;
+      }
+
+      tbody tr td:first-child {
+        text-align: left;
+        color: var(--muted);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+      }
+
+      tbody tr td:nth-child(2) {
+        text-align: center;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      tr.sec-hdr td {
+        background: var(--surface2) !important;
+        color: var(--muted);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-family: 'IBM Plex Mono', monospace;
+        padding: 5px 14px;
+        border-bottom: 1px solid var(--border2);
+      }
+
+      tr.row-total td {
+        background: var(--alt1);
+        font-weight: 500;
+        color: var(--text);
+      }
+
+      tr.row-grand td {
+        color: var(--accent);
+        font-weight: 500;
+        font-size: 13px;
+        border-top: 1px solid var(--faint);
+      }
+
+      tr.row-tax td {
+        color: var(--danger);
+      }
+
+      tr.row-net td {
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      tr.row-netpct td {
+        color: var(--muted);
+        font-size: 11px;
+        font-style: italic;
+      }
+
+      tbody tr:not(.sec-hdr):hover td:first-child,
+      tbody tr:not(.sec-hdr):hover td:nth-child(2) {
+        background: var(--alt1);
+      }
+
+      /* alternating column tints — applied via JS inline style */
+      .diff-b {
+        display: inline-block;
+        font-size: 10px;
+        padding: 1px 5px;
+        border-radius: 3px;
+        margin-left: 5px;
+        font-family: 'IBM Plex Mono', monospace;
+      }
+
+      .diff-p {
+        background: rgba(74, 222, 128, 0.14);
+        color: var(--accent);
+      }
+
+      .diff-n {
+        background: rgba(248, 113, 113, 0.14);
+        color: var(--danger);
+      }
+
+      /* ── EMPTY ── */
+      .empty {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--muted);
+      }
+
+      .empty-icon {
+        font-size: 28px;
+        opacity: 0.25;
+        margin-bottom: 0.5rem;
+      }
+
+      .empty p {
+        font-size: 13px;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        padding: 0.85rem 1.75rem;
+        border-top: 1px solid var(--border);
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 10px;
+        color: var(--muted);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+
+  <body data-theme="day">
+
+    <header>
+      <div class="brand">
+        <div class="brand-tag">AZH Tools &mdash; v1.0</div>
+        <div class="brand-title"><strong>AZH</strong> Salary Package Comparator</div>
+      </div>
+      <div class="theme-row">
+        <span class="theme-label">Theme</span>
+        <button class="theme-btn active" onclick="setTheme('day',this)">Day</button>
+        <button class="theme-btn" onclick="setTheme('night',this)">Night</button>
+        <button class="theme-btn" onclick="setTheme('day',this)">Day</button>
+        <button class="theme-btn" onclick="setTheme('sepia',this)">Sepia</button>
+        <button class="theme-btn" onclick="setTheme('slate',this)">Slate</button>
+      </div>
+    </header>
+
+    <div class="controls">
+      <div class="cg">
+        <label>Label (optional)</label>
+        <div class="inp-wrap"><input class="inp-name" type="text" id="inpName" placeholder="e.g. Offer A"
+            maxlength="20" /></div>
+      </div>
+      <div class="cg">
+        <label>Monthly gross (৳)</label>
+        <div class="inp-wrap"><span class="pfx">৳</span><input type="number" id="inpGross" placeholder="e.g. 75000"
+            min="5000" max="999999" step="500" /></div>
+      </div>
+      <button class="btn-add" onclick="addCol()">+ Add column</button>
+      <button class="btn-clear" onclick="clearAll()">Clear all</button>
+      <div class="view-toggle">
+        <button class="view-btn active" onclick="setView('monthly',this)">Monthly</button>
+        <button class="view-btn" onclick="setView('yearly',this)">Yearly</button>
+      </div>
+    </div>
+
+    <div class="chips" id="chips"></div>
+
+    <div class="ratios-toggle" id="ratiosToggle" onclick="toggleRatios()">
+      <span class="arrow">▶</span>
+      <span>Component ratios (% of gross) — click to customize</span>
+    </div>
+    <div class="ratios-panel" id="ratiosPanel">
+      <div class="ratio-grid" id="ratioGrid"></div>
+      <p class="ratio-note">* Mobile allowance is a fixed amount (not % of gross). Changes apply instantly to the table.
+      </p>
+      <button class="btn-reset" onclick="resetRatios()">↺ Reset to defaults</button>
+    </div>
+
+    <div class="table-wrap" id="tableWrap">
+      <div class="empty">
+        <div class="empty-icon">↑</div>
+        <p>Add a salary column above to begin.</p>
+      </div>
+    </div>
+
+    <footer>
+      <span>AZH Salary Package Comparator &mdash; all values are estimates</span>
+      <span>Tax: Bangladesh FY2025-26 slabs &nbsp;|&nbsp; % diff shown against first column</span>
+    </footer>
+
+    <script>
+      const COL_TINTS_NIGHT = ['rgba(30,80,50,0.18)', 'rgba(30,50,90,0.18)', 'rgba(70,30,90,0.18)', 'rgba(90,80,20,0.14)', 'rgba(20,70,80,0.18)', 'rgba(90,20,50,0.16)'];
+      const COL_TINTS_DAY = ['rgba(16,185,80,0.07)', 'rgba(37,99,235,0.07)', 'rgba(124,58,237,0.07)', 'rgba(180,130,0,0.07)', 'rgba(6,182,212,0.07)', 'rgba(219,39,119,0.07)'];
+      const COL_TINTS_SEPIA = ['rgba(60,120,40,0.08)', 'rgba(30,80,150,0.08)', 'rgba(120,40,20,0.08)', 'rgba(150,100,10,0.08)', 'rgba(20,120,110,0.08)', 'rgba(140,30,80,0.08)'];
+      const COL_TINTS_SLATE = ['rgba(100,200,255,0.07)', 'rgba(160,130,255,0.07)', 'rgba(100,255,180,0.07)', 'rgba(255,200,80,0.07)', 'rgba(100,180,255,0.07)', 'rgba(255,100,150,0.07)'];
+
+      const TINT_MAP = { night: COL_TINTS_NIGHT, day: COL_TINTS_DAY, sepia: COL_TINTS_SEPIA, slate: COL_TINTS_SLATE };
+
+      const DEFAULTS = {
+        basic: 60, hr: 25, travel: 4.167, medical: 5, passage: 5.833,
+        festival: 8.333, mobile_fixed: 4000, perf: 25
+      };
+
+      let ratios = { ...DEFAULTS };
+      let columns = []; // {gross, label}
+      let view = 'monthly';
+      let theme = 'night';
+
+      /* ── RATIO PANEL ── */
+      const RATIO_DEFS = [
+        { key: 'basic', label: 'Basic', pct: true },
+        { key: 'hr', label: 'House rent', pct: true },
+        { key: 'travel', label: 'Travel allowance', pct: true },
+        { key: 'medical', label: 'Medical allowance', pct: true },
+        { key: 'passage', label: 'Passage (local)', pct: true },
+        { key: 'festival', label: 'Festival bonus', pct: true },
+        { key: 'perf', label: 'Performance bonus', pct: true },
+        { key: 'mobile_fixed', label: 'Mobile (fixed ৳)', pct: false },
+      ];
+
+      function buildRatioPanel() {
+        const grid = document.getElementById('ratioGrid');
+        grid.innerHTML = '';
+        RATIO_DEFS.forEach(def => {
+          const val = ratios[def.key];
+          const sfx = def.pct ? '%' : '৳';
+          const step = def.pct ? '0.001' : '100';
+          grid.innerHTML += `
       <div class="ratio-item">
         <label>${def.label}</label>
         <div class="ratio-inp-wrap">
@@ -235,198 +733,199 @@ function buildRatioPanel() {
           <span class="sfx">${sfx}</span>
         </div>
       </div>`;
-  });
-}
+        });
+      }
 
-function updateRatio(key, val, isPct) {
-  const n = parseFloat(val);
-  if (isNaN(n) || n < 0) return;
-  ratios[key] = n;
-  render();
-}
+      function updateRatio(key, val, isPct) {
+        const n = parseFloat(val);
+        if (isNaN(n) || n < 0) return;
+        ratios[key] = n;
+        render();
+      }
 
-function resetRatios() {
-  ratios = { ...DEFAULTS };
-  buildRatioPanel();
-  render();
-}
+      function resetRatios() {
+        ratios = { ...DEFAULTS };
+        buildRatioPanel();
+        render();
+      }
 
-function toggleRatios() {
-  const tog = document.getElementById('ratiosToggle');
-  const pan = document.getElementById('ratiosPanel');
-  tog.classList.toggle('open');
-  pan.classList.toggle('open');
-}
+      function toggleRatios() {
+        const tog = document.getElementById('ratiosToggle');
+        const pan = document.getElementById('ratiosPanel');
+        tog.classList.toggle('open');
+        pan.classList.toggle('open');
+      }
 
-/* ── TAX ── */
-function calcTax(yearly) {
-  const slabs = [[350000,0],[100000,.05],[300000,.10],[400000,.15],[500000,.20]];
-  let r = yearly, t = 0;
-  for (const [l,rate] of slabs) { if (r<=0) break; t += Math.min(r,l)*rate; r -= l; }
-  return t;
-}
+      /* ── TAX ── */
+      function calcTax(yearly) {
+        const slabs = [[350000, 0], [100000, .05], [300000, .10], [400000, .15], [500000, .20]];
+        let r = yearly, t = 0;
+        for (const [l, rate] of slabs) { if (r <= 0) break; t += Math.min(r, l) * rate; r -= l; }
+        return t;
+      }
 
-/* ── PKG CALC ── */
-function pkg(g) {
-  const r = ratios;
-  const basic    = Math.round(g * r.basic/100);
-  const hr       = Math.round(g * r.hr/100);
-  const travel   = Math.round(g * r.travel/100);
-  const medical  = Math.round(g * r.medical/100);
-  const passage  = Math.round(g * r.passage/100);
-  const festival = Math.round(g * r.festival/100);
-  const mobile   = Math.round(r.mobile_fixed);
-  const fixedAll = festival + mobile;
-  const totalFixed = g + fixedAll;
-  const perf     = Math.round(g * r.perf/100);
-  const grand    = totalFixed + perf;
-  const tax      = Math.round(calcTax(g*12)/12);
-  const net      = g - tax;
-  const netPctGross = ((net/g)*100).toFixed(1);
-  const netPctGrand = ((net/grand)*100).toFixed(1);
-  return {basic,hr,travel,medical,passage,gross:g,festival,mobile,fixedAll,totalFixed,perf,grand,tax,net,netPctGross,netPctGrand,gratuity:basic};
-}
+      /* ── PKG CALC ── */
+      function pkg(g) {
+        const r = ratios;
+        const basic = Math.round(g * r.basic / 100);
+        const hr = Math.round(g * r.hr / 100);
+        const travel = Math.round(g * r.travel / 100);
+        const medical = Math.round(g * r.medical / 100);
+        const passage = Math.round(g * r.passage / 100);
+        const festival = Math.round(g * r.festival / 100);
+        const mobile = Math.round(r.mobile_fixed);
+        const fixedAll = festival + mobile;
+        const totalFixed = g + fixedAll;
+        const perf = Math.round(g * r.perf / 100);
+        const grand = totalFixed + perf;
+        const tax = Math.round(calcTax(g * 12) / 12);
+        const net = g - tax;
+        const netPctGross = ((net / g) * 100).toFixed(1);
+        const netPctGrand = ((net / grand) * 100).toFixed(1);
+        return { basic, hr, travel, medical, passage, gross: g, festival, mobile, fixedAll, totalFixed, perf, grand, tax, net, netPctGross, netPctGrand, gratuity: basic };
+      }
 
-/* ── FORMAT ── */
-function f(n, fm) {
-  const val = fm ? n : (view==='yearly' ? n*12 : n);
-  return '৳' + Math.round(val).toLocaleString('en-IN');
-}
+      /* ── FORMAT ── */
+      function f(n, fm) {
+        const val = fm ? n : (view === 'yearly' ? n * 12 : n);
+        return '৳' + Math.round(val).toLocaleString('en-IN');
+      }
 
-function diff(val, base) {
-  if (val === base) return '';
-  const d = ((val-base)/base*100).toFixed(1);
-  const cls = d>0 ? 'diff-p' : 'diff-n';
-  return `<span class="diff-b ${cls}">${d>0?'+':''}${d}%</span>`;
-}
+      function diff(val, base) {
+        if (val === base) return '';
+        const d = ((val - base) / base * 100).toFixed(1);
+        const cls = d > 0 ? 'diff-p' : 'diff-n';
+        return `<span class="diff-b ${cls}">${d > 0 ? '+' : ''}${d}%</span>`;
+      }
 
-/* ── ROW DEFINITIONS ── */
-const ROWS = [
-  {t:'sec',  text:'Gross components'},
-  {t:'data', label:'Basic',                  key:'basic',      pb:'gross', fm:false},
-  {t:'data', label:'House rent',             key:'hr',         pb:'gross', fm:false},
-  {t:'data', label:'Travel allowance',       key:'travel',     pb:'gross', fm:false},
-  {t:'data', label:'Medical allowance',      key:'medical',    pb:'gross', fm:false},
-  {t:'data', label:'Passage (local)',        key:'passage',    pb:'gross', fm:false},
-  {t:'total',label:'Monthly gross (a)',      key:'gross',      pb:null,    fm:false},
-  {t:'sec',  text:'Fixed allowances'},
-  {t:'data', label:'Festival bonus',         key:'festival',   pb:'gross', fm:false},
-  {t:'data', label:'Mobile (reimbursement)', key:'mobile',     pb:null,    fm:false, note:'fixed ৳'},
-  {t:'total',label:'Fixed allowances (b)',   key:'fixedAll',   pb:'gross', fm:false},
-  {t:'total',label:'Total fixed pay (a+b)',  key:'totalFixed', pb:'gross', fm:false},
-  {t:'sec',  text:'Variable'},
-  {t:'data', label:'Performance bonus (100%)',key:'perf',      pb:'gross', fm:false},
-  {t:'grand',label:'Grand total',            key:'grand',      pb:'gross', fm:false},
-  {t:'sec',  text:'Tax & net — always monthly'},
-  {t:'tax',  label:'Est. monthly tax',       key:'tax',        pb:'gross', fm:true},
-  {t:'net',  label:'Net take-home (amount)', key:'net',        pb:null,    fm:true},
-  {t:'netpct',label:'Net as % of gross',     key:'netPctGross',pb:null,    fm:true},
-  {t:'netpct',label:'Net as % of grand total',key:'netPctGrand',pb:null,  fm:true},
-  {t:'sec',  text:'Long-term benefit'},
-  {t:'data', label:'Gratuity / year (1 basic)',key:'gratuity', pb:null,    fm:true},
-];
+      /* ── ROW DEFINITIONS ── */
+      const ROWS = [
+        { t: 'sec', text: 'Gross components' },
+        { t: 'data', label: 'Basic', key: 'basic', pb: 'gross', fm: false },
+        { t: 'data', label: 'House rent', key: 'hr', pb: 'gross', fm: false },
+        { t: 'data', label: 'Travel allowance', key: 'travel', pb: 'gross', fm: false },
+        { t: 'data', label: 'Medical allowance', key: 'medical', pb: 'gross', fm: false },
+        { t: 'data', label: 'Passage (local)', key: 'passage', pb: 'gross', fm: false },
+        { t: 'total', label: 'Monthly gross (a)', key: 'gross', pb: null, fm: false },
+        { t: 'sec', text: 'Fixed allowances' },
+        { t: 'data', label: 'Festival bonus', key: 'festival', pb: 'gross', fm: false },
+        { t: 'data', label: 'Mobile (reimbursement)', key: 'mobile', pb: null, fm: false, note: 'fixed ৳' },
+        { t: 'total', label: 'Fixed allowances (b)', key: 'fixedAll', pb: 'gross', fm: false },
+        { t: 'total', label: 'Total fixed pay (a+b)', key: 'totalFixed', pb: 'gross', fm: false },
+        { t: 'sec', text: 'Variable' },
+        { t: 'data', label: 'Performance bonus (100%)', key: 'perf', pb: 'gross', fm: false },
+        { t: 'grand', label: 'Grand total', key: 'grand', pb: 'gross', fm: false },
+        { t: 'sec', text: 'Tax & net — always monthly' },
+        { t: 'tax', label: 'Est. monthly tax', key: 'tax', pb: 'gross', fm: true },
+        { t: 'net', label: 'Net take-home (amount)', key: 'net', pb: null, fm: true },
+        { t: 'netpct', label: 'Net as % of gross', key: 'netPctGross', pb: null, fm: true },
+        { t: 'netpct', label: 'Net as % of grand total', key: 'netPctGrand', pb: null, fm: true },
+        { t: 'sec', text: 'Long-term benefit' },
+        { t: 'data', label: 'Gratuity / year (1 basic)', key: 'gratuity', pb: null, fm: true },
+      ];
 
-/* ── RENDER ── */
-function render() {
-  const chips = document.getElementById('chips');
-  chips.innerHTML = columns.length ? '' : '<span style="font-size:12px;color:var(--muted);font-family:\'IBM Plex Mono\',monospace;">No columns yet.</span>';
-  columns.forEach((col,i) => {
-    chips.innerHTML += `<div class="chip">
+      /* ── RENDER ── */
+      function render() {
+        const chips = document.getElementById('chips');
+        chips.innerHTML = columns.length ? '' : '<span style="font-size:12px;color:var(--muted);font-family:\'IBM Plex Mono\',monospace;">No columns yet.</span>';
+        columns.forEach((col, i) => {
+          chips.innerHTML += `<div class="chip">
       ${col.label ? `<span class="chip-name">${col.label}</span>` : ''}
       ৳${col.gross.toLocaleString('en-IN')}
       <button class="chip-remove" onclick="removeCol(${i})">×</button>
     </div>`;
-  });
+        });
 
-  const wrap = document.getElementById('tableWrap');
-  if (!columns.length) {
-    wrap.innerHTML = `<div class="empty"><div class="empty-icon">↑</div><p>Add a salary column above to begin.</p></div>`;
-    return;
-  }
+        const wrap = document.getElementById('tableWrap');
+        if (!columns.length) {
+          wrap.innerHTML = `<div class="empty"><div class="empty-icon">↑</div><p>Add a salary column above to begin.</p></div>`;
+          return;
+        }
 
-  const pkgs = columns.map(c => pkg(c.gross));
-  const base = pkgs[0];
-  const tints = TINT_MAP[theme] || COL_TINTS_NIGHT;
+        const pkgs = columns.map(c => pkg(c.gross));
+        const base = pkgs[0];
+        const tints = TINT_MAP[theme] || COL_TINTS_NIGHT;
 
-  let html = '<table><thead><tr><th>Component</th><th>% of gross</th>';
-  columns.forEach((col,i) => {
-    const name = col.label ? `${col.label}<br><span style="font-weight:400;font-size:10px;opacity:0.7;">৳${(col.gross/1000).toFixed(1)}k</span>` : `৳${(col.gross/1000).toFixed(1)}k`;
-    html += `<th class="col-h" style="background:${tints[i%tints.length]}">${name}</th>`;
-  });
-  html += '</tr></thead><tbody>';
+        let html = '<table><thead><tr><th>Component</th><th>% of gross</th>';
+        columns.forEach((col, i) => {
+          const name = col.label ? `${col.label}<br><span style="font-weight:400;font-size:10px;opacity:0.7;">৳${(col.gross / 1000).toFixed(1)}k</span>` : `৳${(col.gross / 1000).toFixed(1)}k`;
+          html += `<th class="col-h" style="background:${tints[i % tints.length]}">${name}</th>`;
+        });
+        html += '</tr></thead><tbody>';
 
-  for (const row of ROWS) {
-    if (row.t==='sec') {
-      html += `<tr class="sec-hdr"><td colspan="${columns.length+2}">${row.text}</td></tr>`;
-      continue;
-    }
-    const trClass = row.t==='total'?'row-total':row.t==='grand'?'row-grand':row.t==='tax'?'row-tax':row.t==='net'?'row-net':row.t==='netpct'?'row-netpct':'';
-    const sp = pkgs[0];
-    let pctStr = '—';
-    if (row.pb) {
-      pctStr = ((sp[row.key]/sp[row.pb])*100).toFixed(1)+'%';
-      if (row.note) pctStr = row.note;
-    }
+        for (const row of ROWS) {
+          if (row.t === 'sec') {
+            html += `<tr class="sec-hdr"><td colspan="${columns.length + 2}">${row.text}</td></tr>`;
+            continue;
+          }
+          const trClass = row.t === 'total' ? 'row-total' : row.t === 'grand' ? 'row-grand' : row.t === 'tax' ? 'row-tax' : row.t === 'net' ? 'row-net' : row.t === 'netpct' ? 'row-netpct' : '';
+          const sp = pkgs[0];
+          let pctStr = '—';
+          if (row.pb) {
+            pctStr = ((sp[row.key] / sp[row.pb]) * 100).toFixed(1) + '%';
+            if (row.note) pctStr = row.note;
+          }
 
-    html += `<tr class="${trClass}"><td>${row.label}</td><td>${pctStr}</td>`;
-    pkgs.forEach((p,i) => {
-      const tint = tints[i%tints.length];
-      let val;
-      if (row.t==='netpct') {
-        val = p[row.key]+'%';
-      } else {
-        val = f(p[row.key], row.fm || row.t==='tax' || row.t==='net');
+          html += `<tr class="${trClass}"><td>${row.label}</td><td>${pctStr}</td>`;
+          pkgs.forEach((p, i) => {
+            const tint = tints[i % tints.length];
+            let val;
+            if (row.t === 'netpct') {
+              val = p[row.key] + '%';
+            } else {
+              val = f(p[row.key], row.fm || row.t === 'tax' || row.t === 'net');
+            }
+            const d = (i > 0 && row.t !== 'netpct' && row.t !== 'sec') ? diff(p[row.key], base[row.key]) : '';
+            html += `<td style="background:${tint}">${val}${d}</td>`;
+          });
+          html += '</tr>';
+        }
+        html += '</tbody></table>';
+        wrap.innerHTML = html;
       }
-      const d = (i>0 && row.t!=='netpct' && row.t!=='sec') ? diff(p[row.key], base[row.key]) : '';
-      html += `<td style="background:${tint}">${val}${d}</td>`;
-    });
-    html += '</tr>';
-  }
-  html += '</tbody></table>';
-  wrap.innerHTML = html;
-}
 
-/* ── CONTROLS ── */
-function addCol() {
-  const gross = parseInt(document.getElementById('inpGross').value);
-  const label = document.getElementById('inpName').value.trim();
-  if (!gross || gross < 5000 || gross > 999999) {
-    document.getElementById('inpGross').style.outline = '1.5px solid var(--danger)';
-    setTimeout(()=>document.getElementById('inpGross').style.outline='', 1200);
-    return;
-  }
-  columns.push({ gross, label: label || '' });
-  document.getElementById('inpGross').value = '';
-  document.getElementById('inpName').value = '';
-  render();
-}
+      /* ── CONTROLS ── */
+      function addCol() {
+        const gross = parseInt(document.getElementById('inpGross').value);
+        const label = document.getElementById('inpName').value.trim();
+        if (!gross || gross < 5000 || gross > 999999) {
+          document.getElementById('inpGross').style.outline = '1.5px solid var(--danger)';
+          setTimeout(() => document.getElementById('inpGross').style.outline = '', 1200);
+          return;
+        }
+        columns.push({ gross, label: label || '' });
+        document.getElementById('inpGross').value = '';
+        document.getElementById('inpName').value = '';
+        render();
+      }
 
-function removeCol(i) { columns.splice(i,1); render(); }
-function clearAll() { columns = []; render(); }
+      function removeCol(i) { columns.splice(i, 1); render(); }
+      function clearAll() { columns = []; render(); }
 
-function setView(v, btn) {
-  view = v;
-  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  render();
-}
+      function setView(v, btn) {
+        view = v;
+        document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render();
+      }
 
-function setTheme(t, btn) {
-  theme = t;
-  document.body.setAttribute('data-theme', t);
-  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  render();
-}
+      function setTheme(t, btn) {
+        theme = t;
+        document.body.setAttribute('data-theme', t);
+        document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render();
+      }
 
-/* ── KEYBOARD ── */
-['inpGross','inpName'].forEach(id => {
-  document.getElementById(id).addEventListener('keydown', e => { if (e.key==='Enter') addCol(); });
-});
+      /* ── KEYBOARD ── */
+      ['inpGross', 'inpName'].forEach(id => {
+        document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') addCol(); });
+      });
 
-/* ── INIT ── */
-buildRatioPanel();
-render();
-</script>
-</body>
+      /* ── INIT ── */
+      buildRatioPanel();
+      render();
+    </script>
+  </body>
+
 </html>
