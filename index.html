@@ -327,6 +327,19 @@
         font-size: 11px;
         color: var(--text);
         background: var(--surface2);
+        cursor: grab;
+        user-select: none;
+        transition: border-color 0.15s, box-shadow 0.15s, opacity 0.15s;
+      }
+
+      .chip.dragging {
+        opacity: 0.4;
+        cursor: grabbing;
+      }
+
+      .chip.drag-over {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 30%, transparent);
       }
 
       .chip-name {
@@ -506,6 +519,21 @@
       thead th.col-h {
         font-size: 12px;
         color: var(--text);
+        cursor: grab;
+        user-select: none;
+        transition: opacity 0.15s, box-shadow 0.15s;
+      }
+
+      thead th.col-h:active {
+        cursor: grabbing;
+      }
+
+      thead th.col-h.col-dragging {
+        opacity: 0.35;
+      }
+
+      thead th.col-h.col-drag-over {
+        box-shadow: inset 3px 0 0 var(--accent);
       }
 
       tbody tr td {
@@ -861,12 +889,14 @@
         const chips = document.getElementById('chips');
         chips.innerHTML = columns.length ? '' : '<span style="font-size:12px;color:var(--muted);">No columns yet.</span>';
         columns.forEach((col, i) => {
-          chips.innerHTML += `<div class="chip">
+          chips.innerHTML += `<div class="chip" draggable="true" data-idx="${i}">
+      <span class="drag-handle" style="color:var(--faint);margin-right:3px;font-size:10px;">⠿</span>
       ${col.label ? `<span class="chip-name">${col.label}</span>` : ''}
       ৳${col.gross.toLocaleString('en-IN')}
       <button class="chip-remove" onclick="removeCol(${i})">×</button>
     </div>`;
         });
+        initChipDrag();
 
         const wrap = document.getElementById('tableWrap');
         if (!columns.length) {
@@ -881,7 +911,7 @@
         let html = '<table><thead><tr><th>Component</th><th>% of gross</th>';
         columns.forEach((col, i) => {
           const name = col.label ? `${col.label}<br><span style="font-weight:400;font-size:10px;opacity:0.7;">৳${(col.gross / 1000).toFixed(1)}k</span>` : `৳${(col.gross / 1000).toFixed(1)}k`;
-          html += `<th class="col-h" style="background:${tints[i % tints.length]}">${name}</th>`;
+          html += `<th class="col-h" draggable="true" data-idx="${i}" style="background:${tints[i % tints.length]}">⠿ ${name}</th>`;
         });
         html += '</tr></thead><tbody>';
 
@@ -914,6 +944,72 @@
         }
         html += '</tbody></table>';
         wrap.innerHTML = html;
+        initColDrag();
+      }
+
+      /* ── DRAG & DROP ── */
+      let dragSrc = null;
+
+      function moveColumn(fromIdx, toIdx) {
+        if (fromIdx === toIdx) return;
+        const col = columns.splice(fromIdx, 1)[0];
+        columns.splice(toIdx, 0, col);
+        render();
+      }
+
+      function initChipDrag() {
+        const chips = document.querySelectorAll('#chips .chip[draggable]');
+        chips.forEach(chip => {
+          chip.addEventListener('dragstart', e => {
+            dragSrc = parseInt(chip.dataset.idx);
+            chip.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          chip.addEventListener('dragend', () => {
+            chip.classList.remove('dragging');
+            document.querySelectorAll('#chips .chip').forEach(c => c.classList.remove('drag-over'));
+          });
+          chip.addEventListener('dragover', e => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            document.querySelectorAll('#chips .chip').forEach(c => c.classList.remove('drag-over'));
+            chip.classList.add('drag-over');
+          });
+          chip.addEventListener('dragleave', () => chip.classList.remove('drag-over'));
+          chip.addEventListener('drop', e => {
+            e.preventDefault();
+            const toIdx = parseInt(chip.dataset.idx);
+            if (dragSrc !== null && dragSrc !== toIdx) moveColumn(dragSrc, toIdx);
+          });
+          chip.querySelector('.chip-remove').addEventListener('mousedown', e => e.stopPropagation());
+        });
+      }
+
+      function initColDrag() {
+        const headers = document.querySelectorAll('thead th.col-h[draggable]');
+        headers.forEach(th => {
+          th.addEventListener('dragstart', e => {
+            dragSrc = parseInt(th.dataset.idx);
+            th.classList.add('col-dragging');
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          th.addEventListener('dragend', () => {
+            th.classList.remove('col-dragging');
+            document.querySelectorAll('thead th.col-h').forEach(h => h.classList.remove('col-drag-over'));
+          });
+          th.addEventListener('dragover', e => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            document.querySelectorAll('thead th.col-h').forEach(h => h.classList.remove('col-drag-over'));
+            th.classList.add('col-drag-over');
+          });
+          th.addEventListener('dragleave', () => th.classList.remove('col-drag-over'));
+          th.addEventListener('drop', e => {
+            e.preventDefault();
+            const toIdx = parseInt(th.dataset.idx);
+            if (dragSrc !== null && dragSrc !== toIdx) moveColumn(dragSrc, toIdx);
+          });
+        });
       }
 
       /* ── CONTROLS ── */
